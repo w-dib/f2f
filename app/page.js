@@ -37,12 +37,12 @@ export default function Home() {
     <main>
       <div className="flex flex-col mx-5 md:mx-auto md:max-w-7xl">
         {/* Title */}
-        <div className="mt-7 text-white text-3xl md:text-5xl text-center md:text-left leading-relaxed">
+        <div className="mt-7 text-white text-3xl md:text-5xl text-left leading-relaxed">
           Founder-2-Founder: MENA&apos;s 1<sup className="">st</sup> Co-founder
           Matchmaking Platform
         </div>
         {/* Subtitle */}
-        <div className="mt-5 md:mt-16 text-white text-lg md:text-xl font-thin text-center md:text-left">
+        <div className="mt-5 md:mt-16 text-white text-lg md:text-xl font-thin text-left">
           Join a vibrant community of startup founders and find your perfect
           match based on shared values, vision, and goals, and start building
           your business today.
