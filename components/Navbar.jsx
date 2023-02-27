@@ -13,6 +13,8 @@ import {
 } from "@heroicons/react/24/outline";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 
+import { Press_Start_2P } from "next/font/google";
+const p2 = Press_Start_2P({ weight: "400", subsets: ["latin"] });
 const library = [
   {
     name: "Co-founder Matching",
@@ -131,11 +133,17 @@ export default function Navbar() {
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
           <button
             onClick={() => signIn("google")}
+            className={`${p2.className} px-8 py-2 border-2 border-[#21FF7E] text-white rounded-md text-base cursor-pointer hover:bg-[#29a35c] hover:border-[#29a35c]`}
+          >
+            <a href="/login">Log in</a>
+          </button>
+          {/* 
+          <button
             className="text-sm font-semibold leading-6 text-white"
           >
             Signup / Login with{" "}
             <BsGoogle className="w-4 h-4 inline mb-1 ml-1" />
-          </button>
+          </button> */}
         </div>
       </nav>
       <Dialog
@@ -216,10 +224,9 @@ export default function Navbar() {
               <div className="py-6">
                 <button
                   onClick={() => signIn("google")}
-                  className="-mx-3 block rounded-lg py-2.5 px-3 text-base font-semibold leading-7 text-white hover:bg-gray-50 hover:text-black/90"
+                  className={`${p2.className} px-8 py-2 border-2 border-[#21FF7E] text-white rounded-md text-base cursor-pointer hover:bg-[#29a35c] hover:border-[#29a35c]`}
                 >
-                  Signup / Login with{" "}
-                  <BsGoogle className="w-4 h-4 inline mb-1 ml-1" />
+                  Log in
                 </button>
               </div>
             </div>
