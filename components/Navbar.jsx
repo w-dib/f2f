@@ -1,11 +1,11 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
+import { useSession, signIn, signOut } from "next-auth/react";
 import { Fragment, useState } from "react";
 import { Dialog, Disclosure, Popover, Transition } from "@headlessui/react";
-import { FaLinkedin } from "react-icons/fa";
+import { BsGoogle } from "react-icons/bs";
 import {
-  ArrowPathIcon,
   Bars3Icon,
-  BuildingLibraryIcon,
   CurrencyDollarIcon,
   PencilSquareIcon,
   SquaresPlusIcon,
@@ -15,28 +15,25 @@ import { ChevronDownIcon } from "@heroicons/react/20/solid";
 
 const library = [
   {
-    name: "SAFE Notes",
-    description: "Simple agreement for future equity templates",
+    name: "Co-founder Matching",
+    description: "How it works",
     href: "#",
     icon: PencilSquareIcon,
-  },
-  {
-    name: "MENA Jurisdictions",
-    description: "Where to set up your startup",
-    href: "#",
-    icon: BuildingLibraryIcon,
+    soon: true,
   },
   {
     name: "VC Directory",
     description: "Find the right investors",
     href: "#",
     icon: CurrencyDollarIcon,
+    soon: true,
   },
   {
     name: "Startup Checklist",
     description: "Your tasks from idea to MVP",
     href: "#",
     icon: SquaresPlusIcon,
+    soon: true,
   },
 ];
 
@@ -55,7 +52,7 @@ export default function Navbar() {
       >
         <div className="flex lg:flex-1">
           <a href="#" className="-m-1.5 p-1.5">
-            <img className="h-8 w-auto" src="./img/logo.svg" alt="" />
+            <img className="h-6 w-auto" src="./img/f2f.svg" alt="" />
           </a>
         </div>
         <div className="flex lg:hidden">
@@ -71,9 +68,6 @@ export default function Navbar() {
           <Popover className="relative">
             <Popover.Button className="flex items-center gap-x-1 text-sm font-semibold leading-6 text-white">
               Library{" "}
-              <span class="ml-1 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none bg-[#21FF7E] text-black rounded-full">
-                Soon
-              </span>
               <ChevronDownIcon
                 className="h-5 w-5 flex-none text-white"
                 aria-hidden="true"
@@ -109,27 +103,17 @@ export default function Navbar() {
                         >
                           {item.name}
                           <span className="absolute inset-0" />
+                          {item.soon && (
+                            <span className="ml-2 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none bg-[#21FF7E] text-black rounded-full">
+                              Soon
+                            </span>
+                          )}
                         </a>
                         <p className="mt-1 text-white">{item.description}</p>
                       </div>
                     </div>
                   ))}
                 </div>
-                {/* <div className="grid grid-cols-2 divide-x divide-gray-900/5 bg-gray-50">
-                  {callsToAction.map((item) => (
-                    <a
-                      key={item.name}
-                      href={item.href}
-                      className="flex items-center justify-center gap-x-2.5 p-3 text-sm font-semibold leading-6 text-white hover:bg-gray-100"
-                    >
-                      <item.icon
-                        className="h-5 w-5 flex-none text-white"
-                        aria-hidden="true"
-                      />
-                      {item.name}
-                    </a>
-                  ))}
-                </div> */}
               </Popover.Panel>
             </Transition>
           </Popover>
@@ -137,16 +121,21 @@ export default function Navbar() {
           <a href="#" className="text-sm font-semibold leading-6 text-white">
             Rules
           </a>
-
+          <a href="#" className="text-sm font-semibold leading-6 text-white">
+            About
+          </a>
           <a href="#" className="text-sm font-semibold leading-6 text-white">
             Partner
           </a>
         </Popover.Group>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <a href="#" className="text-sm font-semibold leading-6 text-white">
+          <button
+            onClick={() => signIn("google")}
+            className="text-sm font-semibold leading-6 text-white"
+          >
             Signup / Login with{" "}
-            <FaLinkedin className="w-5 h-5 inline mb-1 ml-1" />
-          </a>
+            <BsGoogle className="w-4 h-4 inline mb-1 ml-1" />
+          </button>
         </div>
       </nav>
       <Dialog
@@ -159,7 +148,7 @@ export default function Navbar() {
         <Dialog.Panel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-black px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center justify-between">
             <a href="#" className="-m-1.5 p-1.5">
-              <img className="h-8 w-auto" src="./img/logo.svg" alt="" />
+              <img className="h-6 w-auto" src="./img/f2f.svg" alt="" />
             </a>
             <button
               type="button"
@@ -176,12 +165,7 @@ export default function Navbar() {
                   {({ open }) => (
                     <>
                       <Disclosure.Button className="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-white text-base font-semibold leading-7 hover:bg-gray-50 hover:text-black/90">
-                        <div>
-                          Library{" "}
-                          <span class="ml-1 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none bg-[#21FF7E] text-black rounded-full">
-                            Soon
-                          </span>
-                        </div>
+                        <div>Library</div>
                         <ChevronDownIcon
                           className={classNames(
                             open ? "rotate-180" : "",
@@ -198,6 +182,11 @@ export default function Navbar() {
                             href={item.href}
                             className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-white hover:bg-gray-50 hover:text-black/90"
                           >
+                            {item.soon && (
+                              <span className="mr-2 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none bg-[#21FF7E] text-black rounded-full">
+                                Soon
+                              </span>
+                            )}
                             {item.name}
                           </Disclosure.Button>
                         ))}
@@ -211,7 +200,12 @@ export default function Navbar() {
                 >
                   Rules
                 </a>
-
+                <a
+                  href="#"
+                  className="text-sm font-semibold leading-6 text-white"
+                >
+                  About
+                </a>
                 <a
                   href="#"
                   className="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-white hover:bg-gray-50 hover:text-black/90"
@@ -220,13 +214,13 @@ export default function Navbar() {
                 </a>
               </div>
               <div className="py-6">
-                <a
-                  href="#"
+                <button
+                  onClick={() => signIn("google")}
                   className="-mx-3 block rounded-lg py-2.5 px-3 text-base font-semibold leading-7 text-white hover:bg-gray-50 hover:text-black/90"
                 >
                   Signup / Login with{" "}
-                  <FaLinkedin className="w-5 h-5 inline mb-1 ml-1" />
-                </a>
+                  <BsGoogle className="w-4 h-4 inline mb-1 ml-1" />
+                </button>
               </div>
             </div>
           </div>
