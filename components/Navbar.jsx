@@ -53,7 +53,7 @@ export default function Navbar() {
         aria-label="Global"
       >
         <div className="flex lg:flex-1">
-          <a href="#" className="-m-1.5 p-1.5">
+          <a href="/" className="-m-1.5 p-1.5">
             <img className="h-6 w-auto" src="./img/f2f.svg" alt="" />
           </a>
         </div>
@@ -133,7 +133,7 @@ export default function Navbar() {
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
           <button
             onClick={() => signIn("google")}
-            className={`${p2.className} px-8 py-2 border-2 border-[#21FF7E] text-white rounded-md text-base cursor-pointer hover:bg-[#29a35c] hover:border-[#29a35c]`}
+            className={`${p2.className} px-3 py-2 border-2 border-[#21FF7E] text-white rounded-md text-sm cursor-pointer hover:bg-[#29a35c] hover:border-[#29a35c]`}
           >
             <a href="/login">Log in</a>
           </button>
@@ -155,7 +155,7 @@ export default function Navbar() {
         <div className="fixed inset-0 z-10" />
         <Dialog.Panel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-black px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center justify-between">
-            <a href="#" className="-m-1.5 p-1.5">
+            <a href="/" className="-m-1.5 p-1.5">
               <img className="h-6 w-auto" src="./img/f2f.svg" alt="" />
             </a>
             <button
@@ -224,7 +224,7 @@ export default function Navbar() {
               <div className="py-6">
                 <button
                   onClick={() => signIn("google")}
-                  className={`${p2.className} px-8 py-2 border-2 border-[#21FF7E] text-white rounded-md text-base cursor-pointer hover:bg-[#29a35c] hover:border-[#29a35c]`}
+                  className={`${p2.className} px-3 py-2 border-2 border-[#21FF7E] text-white rounded-md text-sm cursor-pointer hover:bg-[#29a35c] hover:border-[#29a35c]`}
                 >
                   Log in
                 </button>
