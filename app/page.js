@@ -54,7 +54,7 @@ const howItWorks = [
 
 export default function Home() {
   return (
-    <main className="flex flex-col mx-5 md:mx-auto md:max-w-7xl">
+    <main className="flex flex-col mx-5 md:mx-auto md:max-w-4xl">
       {/* Title */}
       <div className="mt-7 text-white text-3xl md:text-5xl text-left leading-relaxed">
         <span className="underline decoration-[#21FF7E]">
@@ -70,7 +70,7 @@ export default function Home() {
         today.
       </div>
       {/* Login & Signup */}
-      <div className="mt-5 md:mt-16">
+      <div className="mt-5 md:mt-16 pb-7">
         <div className="flex justify-between md:justify-start text-white text-3xl font-normal">
           <div
             className={`${p2.className} md:mr-5 px-3 py-2 bg-[#21FF7E] text-black rounded-md text-base hover:bg-[#29a35c] hover:text-white cursor-pointer`}
@@ -78,18 +78,25 @@ export default function Home() {
             <Link href="/signup">Sign up</Link>
           </div>
         </div>
+        <hr className="h-px mt-5 bg-gray-200 border-0 dark:bg-gray-700" />
       </div>
       {/* How it works */}
-      <div className="flex flex-col mt-7 md:mt-16">
-        <p className="text-white text-center text-2xl">How it works</p>
-        <img className="h-32 w-auto mt-3" src="./img/Frame.svg" alt="" />
-        <div className="px-2">
+      <div className="p-6 text-lg md:text-xl">
+        <p className="text-2xl md:text-3xl text-center font-bold text-white">
+          How it works
+        </p>
+        <img
+          className="py-7 h-40 md:h-52 w-auto mx-auto"
+          src="./img/Frame.svg"
+          alt=""
+        />
+        <div className="mx-auto mt-5 space-y-4 md:max-w-prose">
           {howItWorks.map((step) => (
             <div
               key={step.id}
-              className="flex mt-5 border-b-2 border-dashed border-gray-700 pb-2"
+              className="flex flex-row flex-nowrap gap-4 md:gap-8 "
             >
-              <div className="mx-auto font-bold my-auto text-white text-lg border rounded-full  px-2 border-[#21FF7e]">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border-2 border-[#21FF7e] text-white md:h-16 md:w-16">
                 {step.id}
               </div>
               <p className="ml-3 text-white text-lg md:text-xl font-thin text-left">
@@ -102,8 +109,8 @@ export default function Home() {
       {/* Features */}
       <div className="flex flex-col md:flex-row md:space-x-2 md:mt-16">
         {cards.map((card) => (
-          <div key={card.name} className="mt-5 md:mt-0 mx-auto">
-            <div className="block p-6 bg-white border md:h-60 border-gray-200 rounded-lg shadow hover:bg-gray-100">
+          <div key={card.name} className="mt-5 md:mt-0 mx-auto md:h-72">
+            <div className="block p-6 bg-white border md:h-full border-gray-200 rounded-lg shadow hover:bg-gray-100">
               <div className="flex flex-none h-8 w-8 border rounded-full border-[#21FF7E] items-center justify-center">
                 <card.icon className="h-6 w-6" />
               </div>
