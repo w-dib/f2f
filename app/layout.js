@@ -16,9 +16,7 @@ export default async function RootLayout({ children }) {
     <html lang="en">
       <body className="flex flex-col bg-black/90 h-screen scroll-y-auto">
         <SessionProvider session={session}>
-          <Navbar />
-          <div className="flex-1">{children}</div>
-          <Footer />
+          <div>{children}</div>
         </SessionProvider>
       </body>
     </html>
