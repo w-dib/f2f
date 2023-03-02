@@ -4,9 +4,12 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
-import { db } from "@/lib/firebaseConfig";
+import { db, auth } from "@/lib/firebaseConfig";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { Press_Start_2P } from "next/font/google";
 import Link from "next/link";
+import { toast } from "react-hot-toast";
+
 const p2 = Press_Start_2P({ weight: "400", subsets: ["latin"] });
 
 function Signup() {
@@ -20,10 +23,19 @@ function Signup() {
   const handleSignUp = async (e) => {
     e.preventDefault();
     try {
-      await auth.createUserWithEmailAndPassword(email, password);
-      router.push("/");
+      await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password,
+        firstName,
+        lastName,
+        linkedIn
+      ).then((userCredential) => {
+        console.log("user created:", userCredential);
+      });
     } catch (error) {
-      console.log(error);
+      console.log("error:", error);
+      toast.error("Password must be at least 6 characters");
     }
   };
 
@@ -44,7 +56,7 @@ function Signup() {
             <div className="flex justify-between">
               <div>
                 <input
-                  className="leading-none w-40 md:w-full text-gray-50 p-3  focus:border-blue-700 my-1 border-0 bg-gray-800 rounded focus:text-[#21FF7E]"
+                  className="leading-none w-40 md:w-full text-gray-50 p-3  focus:border-blue-700 my-1 border-0 bg-gray-800 rounded"
                   type="firstName"
                   id="firstName"
                   placeholder="First Name"
@@ -55,7 +67,7 @@ function Signup() {
               {/* label for last name info */}
               <div>
                 <input
-                  className="leading-none w-40 md:w-full text-gray-50 p-3 my-1 border-0 bg-gray-800 rounded focus:text-[#21FF7E]"
+                  className="leading-none w-40 md:w-full text-gray-50 p-3 my-1 border-0 bg-gray-800 rounded"
                   type="lastName"
                   id="lastName"
                   placeholder="Last Name"
@@ -66,7 +78,7 @@ function Signup() {
             </div>
             {/* Input for Email */}
             <input
-              className="leading-none w-full text-gray-50 p-3 my-1 border-0 bg-gray-800 rounded focus:text-[#21FF7E]"
+              className="leading-none w-full text-gray-50 p-3 my-1 border-0 bg-gray-800 rounded"
               type="email"
               id="email"
               placeholder="Email"
@@ -75,17 +87,20 @@ function Signup() {
             />
             <div>
               <input
-                className="leading-none text-gray-50 p-3 w-full my-1 border-0 bg-gray-800 rounded focus:text-[#21FF7E]"
+                className="leading-none text-gray-50 p-3 w-full my-1 border-0 bg-gray-800 rounded"
                 type="password"
                 id="password"
                 placeholder="Password"
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
               />
+              <p className="text-xs text-gray-500 mb-1">
+                Password must be at least 6 characters
+              </p>
             </div>
             <div>
               <input
-                className="leading-none text-gray-50 p-3 w-full my-1 border-0 bg-gray-800 rounded mb-3 focus:text-[#21FF7E]"
+                className="leading-none text-gray-50 p-3 w-full my-1 border-0 bg-gray-800 rounded mb-3"
                 type="linkedIn"
                 id="linkedIn"
                 placeholder="LinkedIn Profile URL"

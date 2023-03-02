@@ -1,13 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
+import SignUp from "@/components/SignUp";
 import {
   ChatBubbleBottomCenterIcon,
   ComputerDesktopIcon,
   LinkIcon,
 } from "@heroicons/react/24/outline";
 import { Press_Start_2P } from "next/font/google";
-import Link from "next/link";
 
 const p2 = Press_Start_2P({ weight: "400", subsets: ["latin"] });
 
@@ -75,13 +75,8 @@ export default function Home() {
         </div>
         {/* Login & Signup */}
         <div className="mt-5 md:mt-16 pb-7">
-          <div className="flex justify-between md:justify-start text-white text-3xl font-normal">
-            <div
-              className={`${p2.className} md:mr-5 px-3 py-2 bg-[#21FF7E] text-black rounded-md text-base hover:bg-[#29a35c] hover:text-white cursor-pointer`}
-            >
-              <Link href="/signup">Sign up</Link>
-            </div>
-          </div>
+          <SignUp />
+
           <hr className="h-px mt-5 bg-gray-200 border-0 dark:bg-gray-700" />
         </div>
         {/* How it works */}

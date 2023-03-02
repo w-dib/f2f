@@ -3,7 +3,7 @@
 import { useSession, signIn, signOut } from "next-auth/react";
 import { Fragment, useState } from "react";
 import { Dialog, Disclosure, Popover, Transition } from "@headlessui/react";
-import { BsGoogle } from "react-icons/bs";
+import { BsLinkedin } from "react-icons/bs";
 import {
   Bars3Icon,
   CurrencyDollarIcon,
@@ -45,6 +45,7 @@ function classNames(...classes) {
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { data: session } = useSession();
 
   return (
     <header className="bg-black shadow-md">
@@ -131,12 +132,26 @@ export default function Navbar() {
           </a>
         </Popover.Group>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <button
-            onClick={() => signIn("google")}
-            className={`${p2.className} px-3 py-2 border-2 border-[#21FF7E] text-white rounded-md text-sm cursor-pointer hover:bg-[#29a35c] hover:border-[#29a35c]`}
-          >
-            <a href="/login">Log in</a>
-          </button>
+          {!session ? (
+            <div className="py-6">
+              <button
+                onClick={() => signIn("linkedin")}
+                className={`${p2.className} px-3 py-2 border-2 border-[#21FF7E] text-white rounded-md text-sm cursor-pointer hover:bg-[#29a35c] hover:border-[#29a35c]`}
+              >
+                <span>Log In With </span>
+                <BsLinkedin className="mb-2 h-6 w-6 inline-block" />{" "}
+              </button>
+            </div>
+          ) : (
+            <div className="py-6">
+              <button
+                onClick={() => signOut("linkedin")}
+                className={`${p2.className} px-3 py-2 border-2 border-[#21FF7E] text-white rounded-md text-sm cursor-pointer hover:bg-[#29a35c] hover:border-[#29a35c]`}
+              >
+                Sign Out
+              </button>
+            </div>
+          )}
           {/* 
           <button
             className="text-sm font-semibold leading-6 text-white"
@@ -221,14 +236,27 @@ export default function Navbar() {
                   Partner
                 </a>
               </div>
-              <div className="py-6">
-                <button
-                  onClick={() => signIn("google")}
-                  className={`${p2.className} px-3 py-2 border-2 border-[#21FF7E] text-white rounded-md text-sm cursor-pointer hover:bg-[#29a35c] hover:border-[#29a35c]`}
-                >
-                  Log in
-                </button>
-              </div>
+
+              {!session ? (
+                <div className="py-6">
+                  <button
+                    onClick={() => signIn("linkedin")}
+                    className={`${p2.className} px-3 py-2 border-2 border-[#21FF7E] text-white rounded-md text-sm cursor-pointer hover:bg-[#29a35c] hover:border-[#29a35c]`}
+                  >
+                    <span>Log In With </span>
+                    <BsLinkedin className="mb-2 h-6 w-6 inline-block" />{" "}
+                  </button>
+                </div>
+              ) : (
+                <div className="py-6">
+                  <button
+                    onClick={() => signOut("linkedin")}
+                    className={`${p2.className} px-3 py-2 border-2 border-[#21FF7E] text-white rounded-md text-sm cursor-pointer hover:bg-[#29a35c] hover:border-[#29a35c]`}
+                  >
+                    Sign Out
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </Dialog.Panel>

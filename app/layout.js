@@ -1,3 +1,4 @@
+import ClientProvider from "@/components/ClientProvider";
 import SessionProvider from "@/components/SessionProvider";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { getServerSession } from "next-auth";
@@ -14,6 +15,8 @@ export default async function RootLayout({ children }) {
     <html lang="en">
       <body className="flex flex-col bg-black/90 h-screen scroll-y-auto">
         <SessionProvider session={session}>
+          <ClientProvider />
+          {/* Client Provider */}
           <div>{children}</div>
         </SessionProvider>
       </body>
