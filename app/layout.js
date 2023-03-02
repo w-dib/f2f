@@ -1,8 +1,6 @@
 import SessionProvider from "@/components/SessionProvider";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { getServerSession } from "next-auth";
-import Footer from "@/components/Footer";
-import Navbar from "@/components/Navbar";
 import "./globals.css";
 
 export const metadata = {
