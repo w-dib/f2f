@@ -1,7 +1,7 @@
 import NextAuth from "next-auth";
-import Credentials from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import LinkedInProvider from "next-auth/providers/linkedin";
+import { FirestoreAdapter } from "@next-auth/firebase-adapter";
 
 export const authOptions = {
   callbacks: {
@@ -27,4 +27,4 @@ export const authOptions = {
   ],
 };
 
-export default NextAuth(authOptions);
+export default NextAuth(authOptions, { adapter: FirestoreAdapter() });

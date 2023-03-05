@@ -74,11 +74,7 @@ export default function Home() {
           today.
         </div>
         {/* Login & Signup */}
-        <div className="mt-5 md:mt-16 pb-7">
-          <SignUp />
-
-          <hr className="h-px mt-5 bg-gray-200 border-0 dark:bg-gray-700" />
-        </div>
+        <SignUp />
         {/* How it works */}
         <div className="p-6 text-lg md:text-xl">
           <p className="text-2xl md:text-3xl text-center font-bold text-white">
