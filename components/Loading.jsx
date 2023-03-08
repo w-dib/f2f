@@ -4,20 +4,18 @@ const Loading = (props) => (
   <ContentLoader
     speed={2}
     width={400}
-    height={150}
-    viewBox="0 0 400 150"
-    backgroundColor="#f3f3f3"
-    foregroundColor="#21ff7e"
+    height={160}
+    viewBox="0 0 400 160"
+    backgroundColor="#90"
+    foregroundColor="#ededed"
     {...props}
   >
-    <circle cx="10" cy="20" r="8" />
-    <rect x="25" y="15" rx="5" ry="5" width="220" height="10" />
-    <circle cx="10" cy="50" r="8" />
-    <rect x="25" y="45" rx="5" ry="5" width="220" height="10" />
-    <circle cx="10" cy="80" r="8" />
-    <rect x="25" y="75" rx="5" ry="5" width="220" height="10" />
-    <circle cx="10" cy="110" r="8" />
-    <rect x="25" y="105" rx="5" ry="5" width="220" height="10" />
+    <rect x="50" y="6" rx="4" ry="4" width="343" height="38" />
+    <rect x="8" y="6" rx="4" ry="4" width="35" height="38" />
+    <rect x="50" y="55" rx="4" ry="4" width="343" height="38" />
+    <rect x="8" y="55" rx="4" ry="4" width="35" height="38" />
+    <rect x="50" y="104" rx="4" ry="4" width="343" height="38" />
+    <rect x="8" y="104" rx="4" ry="4" width="35" height="38" />
   </ContentLoader>
 );
 

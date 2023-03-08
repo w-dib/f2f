@@ -33,16 +33,10 @@ function User() {
 
   return (
     <div className="flex flex-col max-w-lg items-center mx-auto">
-      {userId ? (
-        <>
-          <h1 className="text-white">{userId}</h1>
-          <div onClick={signOut({ callbackUrl: "/" })}>
-            <img src={user.image} />
-          </div>
-        </>
-      ) : (
-        <Loading />
-      )}
+      <h1 className="text-white">{userId}</h1>
+      <div onClick={() => signOut({ callbackUrl: "/" })}>
+        <img src={user.image} />
+      </div>
     </div>
   );
 }
