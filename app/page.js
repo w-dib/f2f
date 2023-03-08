@@ -8,6 +8,8 @@ import {
   LinkIcon,
 } from "@heroicons/react/24/outline";
 import { Press_Start_2P } from "next/font/google";
+import { db } from "@/lib/firebaseConfig";
+import { doc, getDoc } from "firebase/firestore";
 
 const p2 = Press_Start_2P({ weight: "400", subsets: ["latin"] });
 
@@ -54,18 +56,18 @@ const howItWorks = [
   },
 ];
 
-export default function Home() {
+export default async function Home() {
   return (
     <main>
       <Navbar />
       <div className="flex flex-col mx-5 md:mx-auto md:max-w-4xl">
         {/* Title */}
         <div className="mt-7 text-white text-3xl md:text-5xl text-left leading-relaxed">
-          <span className="underline decoration-[#21FF7E]">
+          <span className="underline decoration-[#21FF7E] md:hidden">
             Tinder for Founders
           </span>
-          : Founder-2-Founder is MENA&apos;s 1<sup className="">st</sup>{" "}
-          Co-founder Matchmaking Platform
+          <span className="md:hidden">: </span> Founder-2-Founder is MENA&apos;s
+          1<sup className="">st</sup> Co-founder Matchmaking Platform
         </div>
         {/* Subtitle */}
         <div className="mt-5 md:mt-16 text-white text-lg md:text-xl font-thin text-left">

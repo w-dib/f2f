@@ -1,11 +1,7 @@
 "use client";
 import { Press_Start_2P } from "next/font/google";
 import { useSession, signIn } from "next-auth/react";
-import { BsLinkedin } from "react-icons/bs";
-import { doc, getDoc, serverTimestamp, setDoc } from "firebase/firestore";
-import { db } from "@/lib/firebaseConfig";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
 
 const p2 = Press_Start_2P({ weight: "400", subsets: ["latin"] });
 function SignUp() {
@@ -13,9 +9,8 @@ function SignUp() {
   const router = useRouter();
 
   const createNewUser = async () => {
-    signIn("linkedin", {
-      callbackUrl: `http://localhost:3000/rules`,
-    });
+    signIn();
+    // {callbackUrl: `http://localhost:3000/rules`,}
   };
 
   return (
@@ -27,8 +22,7 @@ function SignUp() {
               onClick={() => createNewUser()}
               className={`${p2.className} md:mr-5 px-3 py-2 bg-[#21FF7E] text-black rounded-md text-base hover:bg-[#29a35c] hover:text-white cursor-pointer`}
             >
-              <span>Sign Up With </span>
-              <BsLinkedin className="mb-2 h-6 w-6 inline-block" />
+              <span>Sign Up</span>
             </button>
           </div>
           <hr className="h-px mt-5 bg-gray-200 border-0 dark:bg-gray-700" />

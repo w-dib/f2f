@@ -3,7 +3,6 @@
 import { useSession, signIn, signOut } from "next-auth/react";
 import { Fragment, useState } from "react";
 import { Dialog, Disclosure, Popover, Transition } from "@headlessui/react";
-import { BsLinkedin } from "react-icons/bs";
 import {
   Bars3Icon,
   CurrencyDollarIcon,
@@ -50,7 +49,7 @@ export default function Navbar() {
   return (
     <header className="bg-black shadow-md">
       <nav
-        className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
+        className="mx-auto flex max-w-7xl items-center justify-between p-6 md:p-0"
         aria-label="Global"
       >
         <div className="flex lg:flex-1">
@@ -138,8 +137,7 @@ export default function Navbar() {
                 onClick={() => signIn("linkedin")}
                 className={`${p2.className} px-3 py-2 border-2 border-[#21FF7E] text-white rounded-md text-sm cursor-pointer hover:bg-[#29a35c] hover:border-[#29a35c]`}
               >
-                <span>Log In With </span>
-                <BsLinkedin className="mb-2 h-6 w-6 inline-block" />{" "}
+                <span>Log In</span>
               </button>
             </div>
           ) : (
@@ -243,8 +241,7 @@ export default function Navbar() {
                     onClick={() => signIn("linkedin")}
                     className={`${p2.className} px-3 py-2 border-2 border-[#21FF7E] text-white rounded-md text-sm cursor-pointer hover:bg-[#29a35c] hover:border-[#29a35c]`}
                   >
-                    <span>Log In With </span>
-                    <BsLinkedin className="mb-2 h-6 w-6 inline-block" />{" "}
+                    <span>Log In</span>
                   </button>
                 </div>
               ) : (
