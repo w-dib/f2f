@@ -30,12 +30,12 @@ function Rules() {
     querySnapshot.forEach((doc) => {
       return doc.data();
     });
-    console.log(querySnapshot.docs[0].data());
     setUser(querySnapshot.docs[0].id);
   };
   if (session) {
     getUser();
   }
+
   const handleCheckboxChange = (index) => {
     const newChecked = [...isChecked];
     newChecked[index] = !newChecked[index];
@@ -46,7 +46,7 @@ function Rules() {
   return (
     <div className="mt-32 md:mt-64 bg-black shadow-md">
       <div className=" text-white mx-auto mt-3 max-w-md flex flex-col items-left space-y-4 p-5">
-        <p className="text-xl">
+        <p className="text-xl text-[#21FF7E]">
           Finding the right co-founder is a serious endeavour. Please confirm
           that you have read and agree to the following rules:
         </p>
@@ -58,7 +58,7 @@ function Rules() {
             className="h-7 w-7"
           />
 
-          <span className="ml-10">
+          <span className="ml-10 max-w-xs">
             I confirm that I am searching for a co-founder. (This means someone
             with at least 10% equity.)
           </span>
@@ -71,7 +71,7 @@ function Rules() {
             onChange={() => handleCheckboxChange(1)}
             className="h-7 w-7"
           />
-          <span className="ml-10">
+          <span className="ml-10 max-w-xs">
             I confirm that I will not use this platform to sell services or
             promote my product.
           </span>
@@ -83,7 +83,7 @@ function Rules() {
             onChange={() => handleCheckboxChange(2)}
             className="h-7 w-7"
           />
-          <span className="ml-10">
+          <span className="ml-10 max-w-xs">
             I confirm that I will not use this platform to try to hire
             non-founder employees for my company.
           </span>
@@ -95,7 +95,7 @@ function Rules() {
             onChange={() => handleCheckboxChange(3)}
             className="h-7 w-7"
           />
-          <span className="ml-10">
+          <span className="ml-10 max-w-xs">
             I confirm that I will treat everyone I meet on the platform with
             respect, and will not act in a way that is rude or offensive.
           </span>
@@ -107,7 +107,7 @@ function Rules() {
             onChange={() => handleCheckboxChange(4)}
             className="h-7 w-7"
           />
-          <span className="ml-10">
+          <span className="ml-10 max-w-xs">
             I confirm that I will not use this platform for any purpose other
             than to find a co-founder.
           </span>

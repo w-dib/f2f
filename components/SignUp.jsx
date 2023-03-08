@@ -20,7 +20,6 @@ function SignUp() {
     querySnapshot.forEach((doc) => {
       return doc.data();
     });
-    console.log(querySnapshot.docs[0].data());
     setUser(querySnapshot.docs[0].id);
   };
   if (session) {
