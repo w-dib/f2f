@@ -25,9 +25,9 @@ function SignUp() {
   if (session) {
     getUser();
   }
-  const createNewUser = async () => {
-    signIn();
-  };
+  // const createNewUser = async () => {
+  //   signIn();
+  // };
 
   return (
     <div>
@@ -35,7 +35,7 @@ function SignUp() {
         <div className="mt-5 md:mt-16 pb-7">
           <div className="flex justify-between md:justify-start text-white text-3xl font-normal">
             <button
-              onClick={() => createNewUser()}
+              onClick={() => signIn(undefined, { callbackUrl: "/rules" })}
               className={`${p2.className} md:mr-5 px-3 py-2 bg-[#21FF7E] text-black rounded-md text-base hover:bg-[#29a35c] hover:text-white cursor-pointer`}
             >
               <span>Sign Up</span>

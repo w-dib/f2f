@@ -134,7 +134,7 @@ export default function Navbar() {
           {!session ? (
             <div className="py-6">
               <button
-                onClick={() => signIn("linkedin")}
+                onClick={() => signIn()}
                 className={`${p2.className} px-3 py-2 border-2 border-[#21FF7E] text-white rounded-md text-sm cursor-pointer hover:bg-[#29a35c] hover:border-[#29a35c]`}
               >
                 <span>Log In</span>
@@ -143,7 +143,7 @@ export default function Navbar() {
           ) : (
             <div className="py-6">
               <button
-                onClick={() => signOut("linkedin")}
+                onClick={() => signOut()}
                 className={`${p2.className} px-3 py-2 border-2 border-[#21FF7E] text-white rounded-md text-sm cursor-pointer hover:bg-[#29a35c] hover:border-[#29a35c]`}
               >
                 Sign Out
@@ -238,7 +238,7 @@ export default function Navbar() {
               {!session ? (
                 <div className="py-6">
                   <button
-                    onClick={() => signIn("linkedin")}
+                    onClick={() => signIn()}
                     className={`${p2.className} px-3 py-2 border-2 border-[#21FF7E] text-white rounded-md text-sm cursor-pointer hover:bg-[#29a35c] hover:border-[#29a35c]`}
                   >
                     <span>Log In</span>
@@ -247,7 +247,7 @@ export default function Navbar() {
               ) : (
                 <div className="py-6">
                   <button
-                    onClick={() => signOut("linkedin")}
+                    onClick={() => signOut()}
                     className={`${p2.className} px-3 py-2 border-2 border-[#21FF7E] text-white rounded-md text-sm cursor-pointer hover:bg-[#29a35c] hover:border-[#29a35c]`}
                   >
                     Sign Out

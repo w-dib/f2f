@@ -3,7 +3,8 @@
 import { useState, useEffect } from "react";
 import { db } from "@/lib/firebaseConfig";
 import { getDoc, doc } from "firebase/firestore";
-
+import { signOut } from "next-auth/react";
+import Loading from "@/components/Loading";
 function User() {
   const [userId, setUserId] = useState(null);
   const [user, setUser] = useState({});
@@ -31,12 +32,16 @@ function User() {
   }, [userId]);
 
   return (
-    <div>
-      {userId && (
+    <div className="flex flex-col max-w-lg items-center mx-auto">
+      {userId ? (
         <>
           <h1 className="text-white">{userId}</h1>
-          <img src={user.image} />
+          <div onClick={signOut({ callbackUrl: "/" })}>
+            <img src={user.image} />
+          </div>
         </>
+      ) : (
+        <Loading />
       )}
     </div>
   );
