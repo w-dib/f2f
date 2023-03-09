@@ -47,7 +47,7 @@ function SignUp() {
         <div className="mt-5 md:mt-16 pb-7">
           <div className="flex justify-between md:justify-start text-white text-3xl font-normal">
             <button
-              onClick={() => router.push(`/user/${user}`)}
+              onClick={() => router.push(`/user/${user}/EditUser`)}
               className={`${p2.className} md:mr-5 px-3 py-2 bg-[#21FF7E] text-black rounded-md text-base hover:bg-[#29a35c] hover:text-white cursor-pointer`}
             >
               <p>My Dashboard</p>

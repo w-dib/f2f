@@ -1,3 +1,8 @@
+//This is a Next.js page component that presents a list of rules that users have to agree
+//to before using the platform. The component checks whether the current user has accepted
+//the rules before and redirects them to the user profile page if they have. Otherwise,
+//the user is presented with the list of rules and checkboxes to accept them. Once the
+//user has accepted the rules, they are redirected to their user profile page.
 "use client";
 import { useSession } from "next-auth/react";
 import {
@@ -30,7 +35,9 @@ function Rules() {
     false,
   ]);
 
-  //check if the user already exists with rulesAccepted = true in the database
+  //// This function is used to check whether the user has already accepted the rules before
+  //// If they haven't (i.e.: they are a brand new user), loading would be set to false
+  /// the return function rendesr, and they're presented with the list of rules and checkboxes to accept them
   const checkExistingUser = async () => {
     const q =
       session &&
@@ -53,14 +60,15 @@ function Rules() {
   if (session) {
     checkExistingUser();
   }
-  //then redirect to user/[id]/editUser
+
+  //// If the user accepted the rules before
+  // they are redirected to their user profile page
   useEffect(() => {
     if (existingUser) {
       router.push(`/user/${user}/`);
     }
   }, [existingUser]);
 
-  //get current user id
   const getUser = async () => {
     const q =
       session &&
@@ -79,19 +87,26 @@ function Rules() {
     getUser();
   }
 
-  //Add new user to database
+  //// This function is used to add a new user to the database.
+  /// It's called when the user clicks the "I agree" button
+  /// and set their rulesAccepted field to true
+  /// Once the user has accepted the rules, they are redirected to their user profile page
   const addNewUser = async () => {
     const docRef = doc(db, "users", user);
     await updateDoc(docRef, { rulesAccepted: true });
-    router.push(`/user/${user}/editUser/`);
+    router.push(`/user/${user}/EditUser/`);
   };
 
-  //Check if user has already accepted rules
+  //// This function is used to handle the checkbox changes
+  /// It's called when the user clicks on a checkbox
+  /// and sets the isChecked state to the opposite of what it was before
   const handleCheckboxChange = (index) => {
     const newChecked = [...isChecked];
     newChecked[index] = !newChecked[index];
     setIsChecked(newChecked);
   };
+
+  //// This function is used to check whether all checkboxes are checked
   const isAllChecked = isChecked.every((checked) => checked);
 
   return (
