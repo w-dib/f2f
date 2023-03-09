@@ -21,6 +21,7 @@ function Rules() {
   const router = useRouter();
   const [user, setUser] = useState("");
   const [existingUser, setExistingUser] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [isChecked, setIsChecked] = useState([
     false,
     false,
@@ -44,6 +45,9 @@ function Rules() {
     });
     if (querySnapshot.docs.length > 0) {
       setExistingUser(true);
+    }
+    if (querySnapshot.docs.length === 0) {
+      setLoading(false);
     }
   };
   if (session) {
@@ -92,8 +96,10 @@ function Rules() {
 
   return (
     <div className="mt-32 md:mt-64 bg-black shadow-md">
-      {existingUser ? (
-        <Loading />
+      {loading ? (
+        <div className="mx-auto mt-3 max-w-md p-5">
+          <Loading />
+        </div>
       ) : (
         <div className=" text-white mx-auto mt-3 max-w-md flex flex-col items-left space-y-4 p-5">
           <p className="text-xl text-[#21FF7E]">
