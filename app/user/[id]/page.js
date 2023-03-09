@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { db } from "@/lib/firebaseConfig";
 import { getDoc, doc } from "firebase/firestore";
 import { signOut } from "next-auth/react";
-import Loading from "@/components/Loading";
 function User() {
   const [userId, setUserId] = useState(null);
   const [user, setUser] = useState({});
