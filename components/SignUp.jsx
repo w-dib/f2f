@@ -9,8 +9,6 @@ function SignUp() {
   const { user, loading } = useAuth();
   const router = useRouter();
 
-  //return function if user is true
-
   if (user) {
     return (
       <div className="mt-5 md:mt-16 pb-7">

@@ -47,24 +47,6 @@ function Rules() {
     }
   };
 
-  // const checkExistingUser = async () => {
-  //   const q = query(
-  //     collection(db, "users"),
-  //     where("email", "==", user.email),
-  //     where("rulesAccepted", "==", true)
-  //   );
-  //   const querySnapshot = await getDocs(q);
-  //   querySnapshot.forEach((doc) => {
-  //     return doc.data();
-  //   });
-  //   if (querySnapshot.docs.length > 0) {
-  //     setExistingUser(true);
-  //   }
-  //   if (querySnapshot.docs.length === 0) {
-  //     setExistingUser(false);
-  //   }
-  // };
-
   useEffect(() => {
     if (user) {
       checkExistingUser();
