@@ -18,8 +18,6 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const { data: session } = useSession();
 
-  //fetch a user from the database, if the user exists, return the user id. If the user does not exist, make a new user and return the user id.
-
   const getUser = async (email) => {
     const q = query(collection(db, "users"), where("email", "==", email));
     const querySnapshot = await getDocs(q);
@@ -41,8 +39,6 @@ export const AuthProvider = ({ children }) => {
     return { ...user, id: docRef.id };
   };
 
-  //make a useEffect hook to check if the user is logged in. If the user is logged in, check if the user exists in the database. If the user exists, set the user state to the user id. If the user does not exist, create a new user and set the user state to the user id. If the user is not logged in, set the user state to null.
-
   useEffect(() => {
     if (session) {
       getUser(session.user.email).then((user) => {
@@ -61,12 +57,9 @@ export const AuthProvider = ({ children }) => {
   }, [session]);
 
   return (
-    <AuthContext.Provider value={{ user, loading }}>
-      {children}
-    </AuthContext.Provider>
+    <AuthContext.Provider value={{ user }}>{children}</AuthContext.Provider>
   );
 };
-
 export default AuthContext;
 export const useAuth = () => {
   return useContext(AuthContext);
