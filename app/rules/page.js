@@ -21,13 +21,14 @@ import { useRouter } from "next/navigation";
 import { Press_Start_2P } from "next/font/google";
 import Loading from "@/components/Loading";
 import { useAuth } from "@/components/AuthContext";
+
 const p2 = Press_Start_2P({ weight: "400", subsets: ["latin"] });
 
 function Rules() {
   const { data: session } = useSession();
   const router = useRouter();
   const { user, loading } = useAuth();
-  const [rulesAccepted, setRulesAccepted] = useState(false);
+  const [existingUser, setExistingUser] = useState(false);
   const [isChecked, setIsChecked] = useState([
     false,
     false,
@@ -36,25 +37,34 @@ function Rules() {
     false,
   ]);
 
-  useEffect(() => {
-    const getRulesAccepted = async () => {
-      if (!session || loading) {
-        return;
-      }
+  const checkExistingUser = async () => {
+    const docRef = doc(db, "users", user);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.data().rulesAccepted === true) {
+      setExistingUser(true);
+    } else {
+      setExistingUser(false);
+    }
+  };
 
-      const docRef = doc(db, "users", user);
-      const docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
-        setRulesAccepted(docSnap.data().rulesAccepted);
-      }
-    };
-    getRulesAccepted();
-  }, []);
+  useEffect(() => {
+    if (user) {
+      checkExistingUser();
+    }
+  }, [user]);
+
+  //// If the user accepted the rules before
+  // they are redirected to their user profile page
+  useEffect(() => {
+    if (existingUser) {
+      router.push(`/user/${user}/`);
+    }
+  }, [existingUser]);
 
   const addNewUser = async () => {
     const docRef = doc(db, "users", user);
     await updateDoc(docRef, { rulesAccepted: true });
-    router.push(`/user/${user}/EditUser/`);
+    router.push(`/user/${user}/NewUser/`);
   };
 
   const handleCheckboxChange = (index) => {

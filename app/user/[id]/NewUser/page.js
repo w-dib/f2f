@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { db } from "@/lib/firebaseConfig";
 import { getDoc, doc } from "firebase/firestore";
 
-function EditUser() {
+function NewUser() {
   return (
     <div className="flex flex-col text-white">
       <div className="p-5 text-2xl text-[#21FF7E] text-left bg-black">
@@ -67,4 +67,4 @@ function EditUser() {
   );
 }
 
-export default EditUser;
+export default NewUser;
