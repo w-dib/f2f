@@ -3,7 +3,7 @@ import SessionProvider from "@/components/SessionProvider";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { getServerSession } from "next-auth";
 import "./globals.css";
-
+import { AuthProvider } from "@/components/AuthContext";
 export const metadata = {
   title: "F2F - Find your co-founder",
   description: "MENA's first co-founder matching platform",
@@ -16,8 +16,7 @@ export default async function RootLayout({ children }) {
       <body className="flex flex-col bg-black/90 h-screen scroll-y-auto">
         <SessionProvider session={session}>
           <ClientProvider />
-          {/* Client Provider */}
-          <div>{children}</div>
+          <AuthProvider>{children}</AuthProvider>
         </SessionProvider>
       </body>
     </html>
