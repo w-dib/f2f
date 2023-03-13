@@ -4,40 +4,39 @@ import { useState, useEffect } from "react";
 import { db } from "@/lib/firebaseConfig";
 import { getDoc, doc } from "firebase/firestore";
 import { signOut } from "next-auth/react";
+import { useAuth } from "@/components/AuthContext";
+import LoadingCircle from "@/components/LoadingCircle";
 function User() {
-  const [userId, setUserId] = useState(null);
-  const [user, setUser] = useState({});
+  const { user, loading } = useAuth();
+  const [userInfo, setUserInfo] = useState(null);
 
   useEffect(() => {
-    const pathname = window?.location.pathname;
-    if (pathname) {
-      setUserId(pathname.substring(6));
-    }
-  }, []);
-
-  useEffect(() => {
-    if (userId) {
-      const getUser = async () => {
-        const docRef = doc(db, "users", userId);
+    async function fetchUserInfo() {
+      if (user) {
+        const docRef = doc(db, "users", user);
         const docSnap = await getDoc(docRef);
-        if (docSnap.exists()) {
-          setUser(docSnap.data());
-        } else {
-          console.log("No such document!");
-        }
-      };
-      getUser();
+        const userInfo = docSnap.data();
+        console.log(userInfo.image);
+        setUserInfo(userInfo);
+      }
     }
-  }, [userId]);
+    fetchUserInfo();
+  }, [user]);
 
-  return (
-    <div className="flex flex-col max-w-lg items-center mx-auto">
-      <h1 className="text-white">{userId}</h1>
-      <div onClick={() => signOut({ callbackUrl: "/" })}>
-        <img src={user.image} />
+  if (loading) {
+    return <LoadingCircle />;
+  }
+
+  if (userInfo) {
+    return (
+      <div className="flex flex-col max-w-lg items-center mx-auto">
+        <h1 className="text-white">{userInfo.name}</h1>
+        <div onClick={() => signOut({ callbackUrl: "/" })}>
+          <img src={userInfo.image} />
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 export default User;
