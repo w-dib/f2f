@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 import { useAuth } from "@/components/AuthContext";
-import Loading from "@/components/loading";
+import LoadingCircle from "@/components/LoadingCircle";
 import { db } from "@/lib/firebaseConfig";
 import { doc, getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
@@ -24,7 +24,7 @@ function NewUser() {
   }, [user]);
 
   if (loading) {
-    return <Loading />;
+    return <LoadingCircle />;
   }
 
   if (userInfo) {

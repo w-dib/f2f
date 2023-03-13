@@ -19,7 +19,7 @@ import { db } from "@/lib/firebaseConfig";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Press_Start_2P } from "next/font/google";
-import Loading from "@/components/Loading";
+import LoadingCircle from "@/components/LoadingCircle";
 import { useAuth } from "@/components/AuthContext";
 
 const p2 = Press_Start_2P({ weight: "400", subsets: ["latin"] });
@@ -76,7 +76,7 @@ function Rules() {
   const isAllChecked = isChecked.every((checked) => checked);
 
   if (loading) {
-    return <Loading />;
+    return <LoadingCircle />;
   }
 
   return (

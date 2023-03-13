@@ -8,8 +8,6 @@ import {
   LinkIcon,
 } from "@heroicons/react/24/outline";
 import { Press_Start_2P } from "next/font/google";
-import { db } from "@/lib/firebaseConfig";
-import { doc, getDoc } from "firebase/firestore";
 
 const p2 = Press_Start_2P({ weight: "400", subsets: ["latin"] });
 

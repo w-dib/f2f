@@ -1,6 +1,6 @@
 import { NinetyRingWithBg } from "react-svg-spinners";
 
-function page() {
+function LoadingCircle() {
   return (
     <div className="fixed bottom-5 flex items-center justify-center w-full h-full">
       <NinetyRingWithBg color="#21FF7E" width="60" height="60" />
@@ -8,4 +8,4 @@ function page() {
   );
 }
 
-export default page;
+export default LoadingCircle;
