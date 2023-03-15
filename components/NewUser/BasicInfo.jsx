@@ -1,11 +1,42 @@
 "use client";
+import { db } from "@/lib/firebaseConfig";
+import { doc, getDoc } from "firebase/firestore";
+import { useEffect, useState } from "react";
+import { AiFillCamera } from "react-icons/ai";
+import { useAuth } from "../AuthContext";
 import FormWrapper from "./FormWrapper";
 
 function BasicInfo() {
+  const [userInfo, setUserInfo] = useState(null);
+  const { user, loading } = useAuth();
+
+  useEffect(() => {
+    async function fetchUserInfo() {
+      if (user) {
+        const docRef = doc(db, "users", user);
+        const docSnap = await getDoc(docRef);
+        const userInfo = docSnap.data();
+        setUserInfo(userInfo);
+      }
+    }
+    fetchUserInfo();
+  }, [user]);
+
   return (
     <FormWrapper title="Basic Info" childrenSteps="1">
       <div className="flex flex-col space-y-4">
-        <div className="flex flex-col mt-5 ">
+        <div className="mx-auto relative mt-3">
+          <img
+            className="rounded-full h-16 w-16 md:h-20 md:w-20"
+            src={
+              userInfo?.image ||
+              `https://ui-avatars.com/api/?name=${userInfo?.name}`
+            }
+            alt="profile picture"
+          />
+          <AiFillCamera className="text-gray-300 rounded-full bg-red-500 absolute cursor-pointer p-1 bottom-0 right-0 h-6 w-6 md:h-7 md:w-7" />
+        </div>
+        <div className="flex flex-col ">
           <label autoFocus className="text-sm font-bold">
             LinkedIn URL<span className="text-red-500">*</span>
             <p className="font-normal">URL should start with https://</p>
@@ -35,8 +66,8 @@ function BasicInfo() {
             <p className="font-normal">Tell us about yourself</p>
           </label>{" "}
           <textarea
-            rows="4"
-            placeholder="Example: I am a software engineer who has been working in the FinTech industry for 3 years. I have been working on a project for the past 6 months, and I am looking for a co-founder to help me build it."
+            rows="3"
+            placeholder="Example: I am a software engineer working on a project for the past 6 months, and I am looking for a co-founder to help me build it."
             className="
             block p-2.5 w-full text-sm border-gray-300 focus:border-2  bg-gray-800 rounded-md"
           />
@@ -46,7 +77,7 @@ function BasicInfo() {
             Acomplishments<span className="text-red-500">*</span>
           </label>{" "}
           <textarea
-            rows="4"
+            rows="3"
             placeholder="Talk about things you've built, awards you've won, funds you've raised, or anything else you're professionally proud of."
             className="
             block p-2.5 w-full text-sm  border-gray-300 focus:border-2  bg-gray-800 rounded-md"
@@ -57,8 +88,8 @@ function BasicInfo() {
             Previous Experience<span className="text-red-500">*</span>
           </label>{" "}
           <textarea
-            rows="4"
-            placeholder="Example: Google, senior software engineer (2018-present)."
+            rows="3"
+            placeholder="Example: Google, DevOps (2018-present)."
             className="
             block p-2.5 w-full text-sm  border-gray-300 focus:border-2  bg-gray-800 rounded-md"
           />

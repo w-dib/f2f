@@ -111,7 +111,7 @@ function MoreInfo() {
             What are some ideas you&apos;re interested in pursuing?
           </label>{" "}
           <textarea
-            rows="4"
+            rows="2"
             placeholder="Example: DeFi platforms, Open Banking, e-Commerce, etc."
             className="
             block p-2.5 w-full text-sm border-gray-300 focus:border-2  bg-gray-800 rounded-md"
@@ -200,7 +200,7 @@ function MoreInfo() {
             What are your expectations for splitting equity?
           </label>{" "}
           <textarea
-            rows="4"
+            rows="2"
             placeholder="In terms of equity, what are your expectations for both giving and receiving as a potential co-founder?"
             className="
             block p-2.5 w-full text-sm  border-gray-300 focus:border-2  bg-gray-800 rounded-md"
@@ -211,7 +211,7 @@ function MoreInfo() {
             Anything else you would like to add about yourself?
           </label>{" "}
           <textarea
-            rows="4"
+            rows="2"
             placeholder="Feel free to add any information that you feel was not covered above."
             className="
             block p-2.5 w-full text-sm  border-gray-300 focus:border-2  bg-gray-800 rounded-md"
