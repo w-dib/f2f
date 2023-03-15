@@ -7,13 +7,27 @@ import { doc, getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { AiFillCamera } from "react-icons/ai";
 import { Press_Start_2P } from "next/font/google";
+import BasicInfo from "@/components/NewUser/BasicInfo";
+import { useMultiStepForm } from "@/components/NewUser/useMultiStepForm";
+import MoreInfo from "@/components/NewUser/MoreInfo";
 
 const p2 = Press_Start_2P({ weight: "400", subsets: ["latin"] });
 
 function NewUser() {
   const { user, loading } = useAuth();
   const [userInfo, setUserInfo] = useState(null);
-
+  const {
+    step,
+    steps,
+    currentStepIndex,
+    isFirstStep,
+    isLastStep,
+    next,
+    previous,
+  } = useMultiStepForm([
+    <BasicInfo key="basic-info" />,
+    <MoreInfo key="more-info" />,
+  ]);
   useEffect(() => {
     async function fetchUserInfo() {
       if (user) {
@@ -35,7 +49,7 @@ function NewUser() {
     return (
       <div className="flex flex-col text-white scroll-y-auto">
         <div className="p-5 text-2xl text-[#21FF7E] text-left bg-black">
-          <div className="md:px-5 max-w-lg mx-auto">
+          <div className="md:px-5 max-w-xl mx-auto">
             <p>My Profile</p>
           </div>
         </div>
@@ -60,133 +74,24 @@ function NewUser() {
             />
             <AiFillCamera className="text-gray-300 rounded-full bg-red-500 absolute cursor-pointer p-1 bottom-0 right-0 h-5 w-5 md:h-6 md:w-6" />
           </div>
-
-          {/* Basic info */}
-          <div className="p-5 divide-y divide-[#21FF7E] md:border md:border-gray-50 md:rounded-md">
-            <div className="flex justify-between">
-              <span className="text-2xl text-[#21FF7E] text-left mb-2">
-                Basic info
-              </span>
-              <span className="text-2xl">1/4</span>
-            </div>
-            <div className="flex flex-col space-y-4">
-              <div className="flex flex-col  mt-10">
-                <label className="text-sm font-bold">
-                  LinkedIn URL<span className="text-red-500">*</span>
-                  <p className="font-normal">URL should start with https://</p>
-                </label>
-                <input
-                  type="text"
-                  placeholder="https://www.linkedin.com/in/..."
-                  className="focus:border-2  bg-gray-800 rounded-md p-2"
-                />
-              </div>
-              <div className="flex flex-col ">
-                <label className="text-sm font-bold">
-                  Location<span className="text-red-500">*</span>
-                  <p className="font-normal">Where do you live?</p>
-                </label>{" "}
-                <input
-                  type="text"
-                  placeholder="Dubai, UAE"
-                  className="focus:border-2  bg-gray-800 rounded-md p-2"
-                />
-              </div>
-              <div className="flex flex-col ">
-                <label className="text-sm font-bold">
-                  About Me<span className="text-red-500">*</span>
-                  <p className="font-normal">Tell us about yourself</p>
-                </label>{" "}
-                <textarea
-                  rows="4"
-                  placeholder="Example: I am a software engineer who has been working in the FinTech industry for 3 years. I have been working on a project for the past 6 months, and I am looking for a co-founder to help me build it."
-                  className="
-                block p-2.5 w-full text-sm border-gray-300 focus:border-2  bg-gray-800 rounded-md"
-                />
-              </div>
-              <div className="flex flex-col ">
-                <label className="text-sm font-bold">
-                  Acomplishments<span className="text-red-500">*</span>
-                </label>{" "}
-                <textarea
-                  rows="4"
-                  placeholder="Talk about things you've built, awards you've won, funds you've raised, or anything else you're professionally proud of."
-                  className="
-                block p-2.5 w-full text-sm  border-gray-300 focus:border-2  bg-gray-800 rounded-md"
-                />
-              </div>
-              <div className="flex flex-col ">
-                <label className="text-sm font-bold">
-                  Previous Experience<span className="text-red-500">*</span>
-                </label>{" "}
-                <textarea
-                  rows="4"
-                  placeholder="Example: Google, senior software engineer (2018-present)."
-                  className="
-                block p-2.5 w-full text-sm  border-gray-300 focus:border-2  bg-gray-800 rounded-md"
-                />
-              </div>
-              {/* Create a radio dial */}
-              <div className="flex flex-col ">
-                <label className="text-sm font-bold">
-                  Are you a technical founder?
-                  <span className="text-red-500">*</span>
-                  <p className="font-normal">
-                    Are you experienced in: Engineering, Product, or Data
-                    Science?
-                  </p>
-                </label>{" "}
-                <div className="flex flex-row space-x-4">
-                  <div className="flex flex-row items-center space-x-2">
-                    <input
-                      type="radio"
-                      name="project"
-                      value="yes"
-                      className="focus:border-2  bg-gray-800 rounded-md p-2"
-                    />
-                    <p>Yes</p>
-                  </div>
-                  <div className="flex flex-row items-center space-x-2">
-                    <input
-                      type="radio"
-                      name="project"
-                      value="no"
-                      className="focus:border-2  bg-gray-800 rounded-md p-2"
-                    />
-                    <p>No</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Gender & Age */}
-              {/* <div className="flex justify-between">
-                <div className="flex flex-col ">
-                  <label className="text-sm font-bold">
-                    Gender<span className="text-red-500">*</span>
-                  </label>
-                  <select className="focus:border-2  bg-gray-800 rounded-md p-2 focus:text-white md:w-60">
-                    <option value="Female">Female</option>
-                    <option value="Male">Male</option>
-                    <option value="Other">Other</option>
-                  </select>
-                </div>
-
-                <div className="flex flex-col ">
-                  <label className="text-sm font-bold">
-                    Age<span className="text-red-500">*</span>
-                  </label>{" "}
-                  <input
-                    type="number"
-                    placeholder="25"
-                    className="focus:border-2  bg-gray-800 rounded-md p-2"
-                  />
-                </div>
-              </div> */}
-
+          <div className="flex flex-col text-white scroll-y-auto p-5 md:border md:border-gray-50 md:rounded-md mb-5">
+            {step}
+            <div className="flex justify-around w-full mt-5">
+              {!isFirstStep && (
+                <button
+                  type="button"
+                  onClick={previous}
+                  className={`${p2.className} w-32 px-3 py-2 border-2 border-[#21FF7E] text-white rounded-md text-sm cursor-pointer hover:bg-[#29a35c] hover:border-[#29a35c]`}
+                >
+                  Back{" "}
+                </button>
+              )}
               <button
-                className={`${p2.className} w-32 mx-auto px-3 py-2 bg-[#21FF7E] text-black rounded-md text-base hover:bg-[#29a35c] hover:text-white cursor-pointer`}
+                type="button"
+                onClick={next}
+                className={`${p2.className} w-32 px-3 py-2 bg-[#21FF7E] text-black rounded-md text-sm hover:bg-[#29a35c] hover:text-white cursor-pointer`}
               >
-                <p>Next</p>
+                {isLastStep ? "Submit" : "Next"}
               </button>
             </div>
           </div>
