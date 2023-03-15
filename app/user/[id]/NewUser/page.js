@@ -7,10 +7,10 @@ import { doc, getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { AiFillCamera } from "react-icons/ai";
 import { Press_Start_2P } from "next/font/google";
-import BasicInfo from "@/components/NewUser/BasicInfo";
 import { useMultiStepForm } from "@/components/NewUser/useMultiStepForm";
+import BasicInfo from "@/components/NewUser/BasicInfo";
 import MoreInfo from "@/components/NewUser/MoreInfo";
-
+import CofounderPreference from "@/components/NewUser/CofounderPreference";
 const p2 = Press_Start_2P({ weight: "400", subsets: ["latin"] });
 
 function NewUser() {
@@ -27,6 +27,7 @@ function NewUser() {
   } = useMultiStepForm([
     <BasicInfo key="basic-info" />,
     <MoreInfo key="more-info" />,
+    <CofounderPreference key="cofounder-preference" />,
   ]);
   useEffect(() => {
     async function fetchUserInfo() {
@@ -49,11 +50,11 @@ function NewUser() {
     return (
       <div className="flex flex-col text-white scroll-y-auto">
         <div className="p-5 text-2xl text-[#21FF7E] text-left bg-black">
-          <div className="md:px-5 max-w-xl mx-auto">
+          <div className="md:px-5 max-w-2xl mx-auto">
             <p>My Profile</p>
           </div>
         </div>
-        <div className="flex flex-col max-w-xl mx-auto">
+        <div className="flex flex-col max-w-2xl mx-auto">
           <div className="p-5">
             <p>
               Your co-founder matching profile is almost live! The more detailed

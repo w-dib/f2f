@@ -101,32 +101,3 @@ function BasicInfo() {
 }
 
 export default BasicInfo;
-
-{
-  /* Gender & Age */
-}
-{
-  /* <div className="flex justify-between">
-            <div className="flex flex-col ">
-              <label className="text-sm font-bold">
-                Gender<span className="text-red-500">*</span>
-              </label>
-              <select className="focus:border-2  bg-gray-800 rounded-md p-2 focus:text-white md:w-60">
-                <option value="Female">Female</option>
-                <option value="Male">Male</option>
-                <option value="Other">Other</option>
-              </select>
-            </div>
-
-            <div className="flex flex-col ">
-              <label className="text-sm font-bold">
-                Age<span className="text-red-500">*</span>
-              </label>{" "}
-              <input required
-                type="number"
-                placeholder="25"
-                className="focus:border-2  bg-gray-800 rounded-md p-2"
-              />
-            </div>
-          </div> */
-}
